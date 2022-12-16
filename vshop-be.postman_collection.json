@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "af2d6ecb-96da-4507-9388-0ea7fb10b1f0",
+		"name": "vshop-be",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "product-catalog-service",
+			"item": [
+				{
+					"name": "Get products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/products/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productName\": \"laptop\",\n    \"price\": 100,\n    \"description\": \"note\",\n    \"category\": \"tech\",\n    \"availability\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/products",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order-service",
+			"item": [
+				{
+					"name": "testfeign",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productName\": \"laptop\",\n    \"price\": 100,\n    \"description\": \"note\",\n    \"category\": \"tech\",\n    \"availability\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8100/api/carts/testfeign",
+							"host": [
+								"localhost"
+							],
+							"port": "8100",
+							"path": [
+								"api",
+								"carts",
+								"testfeign"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api-gateway",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8765/get",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8765/api/products/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productName\": \"laptop\",\n    \"price\": 100,\n    \"description\": \"note\",\n    \"category\": \"tech\",\n    \"availability\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8765/api/products",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "testfeign",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productName\": \"laptop\",\n    \"price\": 100,\n    \"description\": \"note\",\n    \"category\": \"tech\",\n    \"availability\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8765/api/carts/testfeign",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"api",
+								"carts",
+								"testfeign"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

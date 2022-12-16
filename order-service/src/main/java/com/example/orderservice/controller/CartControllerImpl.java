@@ -1,7 +1,8 @@
 package com.example.orderservice.controller;
 
-import com.example.orderservice.dto.GetOneProductByIdDto;
 import com.example.orderservice.service.ICartService;
+import com.example.productcatalogservice.dto.CreateOneProductDto;
+import com.example.productcatalogservice.dto.GetOneProductByIdDto;
 import com.example.orderservice.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,10 +42,10 @@ public class CartControllerImpl implements ICartController {
 //                HttpStatus.BAD_REQUEST);
 //    }
 
-    @GetMapping(value = "/testfeign")
+    @PostMapping(value = "/testfeign")
     @ResponseStatus(HttpStatus.OK)
-    public Mono<GetOneProductByIdDto.Response> testFeign(){
-        return cartService.testFeign();
+    public Mono<CreateOneProductDto.Response> testFeign(CreateOneProductDto.Request request){
+        return cartService.testFeign(request);
     }
 
 }

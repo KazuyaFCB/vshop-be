@@ -1,6 +1,7 @@
 package com.example.orderservice.service;
 
-import com.example.orderservice.dto.GetOneProductByIdDto;
+import com.example.productcatalogservice.dto.CreateOneProductDto;
+import com.example.productcatalogservice.dto.GetOneProductByIdDto;
 import com.example.orderservice.feignclient.ProductCatalogProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Mono<GetOneProductByIdDto.Response> testFeign() {
-        return productCatalogProxy.getOneProductById(1);
+    public Mono<CreateOneProductDto.Response> testFeign(CreateOneProductDto.Request request) {
+        return productCatalogProxy.createOneProduct(request);
     }
 }
