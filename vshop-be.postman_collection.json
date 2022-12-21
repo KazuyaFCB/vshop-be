@@ -9,6 +9,83 @@
 			"name": "product-catalog-service",
 			"item": [
 				{
+					"name": "CircuitBreaker",
+					"item": [
+						{
+							"name": "test-retry-api",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/test-retry-api",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"test-retry-api"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "test-circuit-breaker-api",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/test-circuit-breaker-api",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"test-circuit-breaker-api"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "test-rate-limiter-api",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/test-rate-limiter-api",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"test-rate-limiter-api"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "test-bulkhead-api",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/test-bulkhead-api",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"test-bulkhead-api"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Get products",
 					"request": {
 						"method": "GET",
@@ -185,6 +262,44 @@
 								"api",
 								"carts",
 								"testfeign"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "netflix-zuul-api-gateway-server",
+			"item": [
+				{
+					"name": "Get Products by Zuul",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8765/product-catalog-service/api/products/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8765",
+							"path": [
+								"product-catalog-service",
+								"api",
+								"products",
+								"1"
 							]
 						}
 					},
