@@ -38,7 +38,10 @@ public class ProductServiceImpl implements IProductService {
         return Mono.justOrEmpty(request)
                 .filter(req -> Objects.nonNull(req))
                 .switchIfEmpty(Mono.error(new CreateOneProductException(new Throwable("request body is invalid"))))
-                .flatMap(req -> Mono.just(ProductEntity.builder().id(1L).productName(req.getProductName()).price(req.getPrice()).description(req.getDescription()).category(req.getCategory()).availability(req.getAvailability()).build()))
+                .flatMap(req -> {
+                    log.info("{}", req);
+                    return Mono.just(ProductEntity.builder().id(1L).productName(req.getProductName()).price(req.getPrice()).description(req.getDescription()).category(req.getCategory()).availability(req.getAvailability()).build());
+                })
                 .map(productEntity -> CreateOneProductDto.Response.builder().success(true).data(productEntity).message("created success").port(environment.getProperty("local.server.port")).build());
     }
 }

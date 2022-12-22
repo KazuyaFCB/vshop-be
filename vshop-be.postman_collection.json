@@ -191,7 +191,7 @@
 					"response": []
 				},
 				{
-					"name": "Get products",
+					"name": "Get products by SCG",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -211,7 +211,7 @@
 					"response": []
 				},
 				{
-					"name": "Create product",
+					"name": "Create product by SCG",
 					"request": {
 						"method": "POST",
 						"header": [],
