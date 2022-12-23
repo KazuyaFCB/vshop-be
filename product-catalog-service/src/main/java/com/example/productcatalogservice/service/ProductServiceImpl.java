@@ -1,5 +1,6 @@
 package com.example.productcatalogservice.service;
 
+import com.example.productcatalogservice.configuration.EnvironmentConfiguration;
 import com.example.productcatalogservice.dto.CreateOneProductDto;
 import com.example.productcatalogservice.dto.GetOneProductByIdDto;
 import com.example.productcatalogservice.exception.CreateOneProductException;
@@ -19,6 +20,9 @@ import java.util.Objects;
 public class ProductServiceImpl implements IProductService {
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private EnvironmentConfiguration environmentConfiguration;
 
     @Override
     public Mono<GetOneProductByIdDto.Response> getOneProductById(long id) {
@@ -42,6 +46,6 @@ public class ProductServiceImpl implements IProductService {
                     log.info("{}", req);
                     return Mono.just(ProductEntity.builder().id(1L).productName(req.getProductName()).price(req.getPrice()).description(req.getDescription()).category(req.getCategory()).availability(req.getAvailability()).build());
                 })
-                .map(productEntity -> CreateOneProductDto.Response.builder().success(true).data(productEntity).message("created success").port(environment.getProperty("local.server.port")).build());
+                .map(productEntity -> CreateOneProductDto.Response.builder().success(true).data(productEntity).message("created success in env " + environmentConfiguration.getEnv()).port(environment.getProperty("local.server.port")).build());
     }
 }
