@@ -1,5 +1,6 @@
 package com.example.productcatalogservice.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
@@ -51,5 +52,19 @@ public class CircuitBreakerController {
     public String testBulkhead() {
         log.info("Test Bulkhead api call received");
         return "sample-api";
+    }
+
+    @GetMapping("/test-hystrix-api")
+    @HystrixCommand(fallbackMethod = "hardcodedResponse2")
+    public String testHystrix() {
+        log.info("Test Hystrix api call received");
+        ResponseEntity<String> forEntity = new RestTemplate().getForEntity("http://localhost:8080/some-dummy-url",
+                String.class);
+        return forEntity.getBody();
+    }
+
+    public String hardcodedResponse2() {
+        log.info("call hardcodedResponse");
+        return "fallback-response";
     }
 }
