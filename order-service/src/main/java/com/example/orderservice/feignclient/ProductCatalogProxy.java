@@ -1,8 +1,8 @@
 package com.example.orderservice.feignclient;
 
-import com.example.productcatalogservice.dto.CreateOneProductDto;
-import com.example.productcatalogservice.dto.GetOneProductByIdDto;
-import com.example.productcatalogservice.util.Constant;
+import com.example.orderservice.dto.CreateOneProductDto;
+import com.example.orderservice.dto.GetOneProductByIdDto;
+import com.example.orderservice.util.Constant;
 import org.springframework.web.bind.annotation.*;
 //import org.springframework.cloud.openfeign.FeignClient;
 //import org.springframework.cloud.netflix.ribbon.RibbonClient;

@@ -1,8 +1,8 @@
 package com.example.orderservice.controller;
 
 import com.example.orderservice.service.ICartService;
-import com.example.productcatalogservice.dto.CreateOneProductDto;
-import com.example.productcatalogservice.dto.GetOneProductByIdDto;
+import com.example.orderservice.dto.CreateOneProductDto;
+import com.example.orderservice.dto.GetOneProductByIdDto;
 import com.example.orderservice.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

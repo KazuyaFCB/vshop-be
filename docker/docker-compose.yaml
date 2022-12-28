@@ -1,0 +1,98 @@
+version: '3.7'
+
+services:
+
+  product-catalog-service:
+    image: hoangvinh175/vshop-be-product-catalog-service:1.0.1
+    mem_limit: 900m
+    ports:
+      - "8000:8000"
+    networks:
+      - vshop-be-network
+    depends_on:
+      - eureka-server
+      - spring-cloud-config-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING_CONFIG_IMPORT: optional:configserver:http://spring-cloud-config-server:8888/
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  order-service:
+    image: hoangvinh175/vshop-be-order-service:1.0.1
+    mem_limit: 900m
+    ports:
+      - "8100:8100"
+    networks:
+      - vshop-be-network
+    depends_on:
+      - eureka-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  api-gateway:
+    image: hoangvinh175/vshop-be-api-gateway:1.0.1
+    mem_limit: 900m
+    ports:
+      - "8765:8765"
+    networks:
+      - vshop-be-network
+    depends_on:
+      - eureka-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  eureka-server:
+    image: hoangvinh175/vshop-be-eureka-server:1.0.1
+    mem_limit: 900m
+    ports:
+      - "8761:8761"
+    networks:
+      - vshop-be-network
+
+  spring-cloud-config-server:
+    image: hoangvinh175/vshop-be-spring-cloud-config-server:1.0.1
+    mem_limit: 900m
+    ports:
+      - "8888:8888"
+    networks:
+      - vshop-be-network
+
+  zipkin-server:
+    image: openzipkin/zipkin:2.24
+    mem_limit: 300m
+    ports:
+      - "9411:9411"
+    networks:
+      - vshop-be-network
+    environment:
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      - rabbitmq
+#   restart: always #Restart if there is a problem starting up
+
+  rabbitmq:
+    image: rabbitmq:3.11.5-management
+    mem_limit: 300m
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - vshop-be-network
+
+
+networks:
+  vshop-be-network:
