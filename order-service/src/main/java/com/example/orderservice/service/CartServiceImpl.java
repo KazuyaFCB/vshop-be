@@ -1,7 +1,7 @@
 package com.example.orderservice.service;
 
-import com.example.productcatalogservice.dto.CreateOneProductDto;
-import com.example.productcatalogservice.dto.GetOneProductByIdDto;
+import com.example.orderservice.dto.CreateOneProductDto;
+import com.example.orderservice.dto.GetOneProductByIdDto;
 import com.example.orderservice.feignclient.ProductCatalogProxy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
