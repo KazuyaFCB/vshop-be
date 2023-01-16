@@ -12,6 +12,8 @@ import reactor.core.publisher.Mono;
 //@FeignClient(name = "product-catalog-service", url = "http://localhost:8000/")
 //@RibbonClient(name="product-catalog-service")
 @ReactiveFeignClient(name = "product-catalog-service")
+//@ReactiveFeignClient(name = "product-catalog-service", url = "${PRODUCT_CATALOG_SERVICE_SERVICE_HOST:http://localhost}:8000")
+//@ReactiveFeignClient(name = "product-catalog-service", url = "${PRODUCT_CATALOG_SERVICE_URI:http://localhost}:8000")
 public interface ProductCatalogProxy {
 
     @GetMapping(value = Constant.API_PRODUCTS + "/{id}")

@@ -8,6 +8,7 @@ import com.example.productcatalogservice.exception.GetOneProductByIdException;
 import com.example.productcatalogservice.entity.ProductEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -23,6 +24,9 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private EnvironmentConfiguration environmentConfiguration;
+
+    @Value("${pom.version}")
+    private String pomVersion;
 
     @Override
     public Mono<GetOneProductByIdDto.Response> getOneProductById(long id) {
@@ -46,6 +50,12 @@ public class ProductServiceImpl implements IProductService {
                     log.info("{}", req);
                     return Mono.just(ProductEntity.builder().id(1L).productName(req.getProductName()).price(req.getPrice()).description(req.getDescription()).category(req.getCategory()).availability(req.getAvailability()).build());
                 })
-                .map(productEntity -> CreateOneProductDto.Response.builder().success(true).data(productEntity).message("created success in env " + environmentConfiguration.getEnv()).port(environment.getProperty("local.server.port")).build());
+                .map(productEntity -> {
+                    String env = environmentConfiguration.getEnv();
+                    String hostName = environment.getProperty("HOSTNAME");
+                    String serviceHost = environment.getProperty("PRODUCT_CATALOG_SERVICE_SERVICE_HOST");
+                    String port = environment.getProperty("local.server.port");
+                    return CreateOneProductDto.Response.builder().success(true).data(productEntity).message(String.format("created success in env %s and hostName is %s and serviceHost is %s and port is %s and pom version is %s", env, hostName, serviceHost, port, pomVersion)).port(port).build();
+                });
     }
 }
